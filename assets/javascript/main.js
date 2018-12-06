@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    var choices = ["Ed Sheeran", "Taylor Swift", "Bruno Mars", "Ariana Grande", "Psy", "BTS", "SNSD"];
+    var choices = ["Ed Sheeran", "Taylor Swift", "Bruno Mars", "Ariana Grande", "Big Bang", "Psy", "BTS", "SNSD"];
 
     var limit = 10;
     var APIkey = "mngk5SvzQ4ueJME0P1Ny4MaxnGV169e3";

@@ -18,19 +18,18 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-danger">
+    <nav class="navbar navbar-expand-md navbar-dark bg-danger fixed-top pl-5">
         <div class="navbar-brand logo" href="#">Artist GIFs</div>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <button id="clear" class="btn btn-warning ml-auto mr-3">⌧ Clear</button>
-            <button id="favorite" class="btn btn-warning mr-3 mt-2 mb-2">♥ Favorite</button>
-            <form class="form-inline">
+        <div class="collapse navbar-collapse mr-4" id="navbarSupportedContent">
+            <button id="clear" class="btn btn-warning ml-auto mr-3 mt-2 mb-2">⌧ Clear</button>
+            <button id="favorite" class="btn btn-warning mr-3 mt-1 mb-1">♥ Favorite</button>
+            <form class="form-inline mt-2 mb-2">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <button type="submit" class="btn btn-warning" id="addon">★ Add</span>
+                        <button type="submit" class="btn btn-warning" id="addon">★ Add</button>
                     </div>
                     <input type="text" class="form-control" placeholder="Artist or Band name">
                 </div>
@@ -38,13 +37,14 @@
         </div>
     </nav>
 
-    <center>
+    <div class="wrapper">
         <div class="choices mb-3"></div>
-        <div class="resultDisplay mb-5"></div>
-    </center>
+        <div class="resultDisplay"></div>
+    </div>
 
     <footer class="footer small text-light bg-danger">
-        &copy; Copyright 2018 Joseph Ahn
+        <div class="container">
+            &copy; Copyright 2018 Joseph Ahn</div>
     </footer>
 
     <script src="./assets/javascript/main.js"></script>

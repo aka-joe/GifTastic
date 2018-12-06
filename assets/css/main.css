@@ -1,5 +1,5 @@
 .navbar-brand {
-    font-size: 36px;
+    font-size: 40px;
     font-weight: 500;
 }
 
@@ -7,11 +7,53 @@
     display: inline-block;
 }
 
+.wrapper {
+    margin-top: 90px;
+    min-height: calc(100vh - 149px);
+    text-align: center;
+    padding: 0;
+}
+
 .footer {
-    position: fixed;
-    padding: 10px;
-    left: 0;
-    bottom: 0;
+    padding: 12px;
     width: 100%;
     text-align: center;
+  }
+
+  @media screen and (max-width: 767px) {
+    @keyframes resize1 {
+        from {font-size: 40px;}
+        to {font-size: 27px;}
+    }
+    .navbar-brand {
+        animation-name: resize1;
+        animation-duration: 1s;
+        font-size: 27px;
+    }
+    .wrapper {
+        margin-top: 67px;
+        min-height: calc(100vh - 126px); 
+    }
+    #clear, #favorite {
+        width: 122px;
+    }
+  }
+
+  @media screen and (max-width: 575px) {
+    @keyframes resize2 {
+        from {font-size: 27px;}
+        to {font-size: 20px;}
+    }
+    .navbar-brand {
+        animation-name: resize2;
+        animation-duration: 1s;
+        font-size: 20px;
+    }
+    .wrapper {
+        margin-top: 60px;
+        min-height: calc(100vh - 119px); 
+    }
+    #clear, #favorite {
+        width: 100%;
+    }
   }
