@@ -1,21 +1,27 @@
 $(document).ready(function () {
-    APIkey = mngk5SvzQ4ueJME0P1Ny4MaxnGV169e3;
+
+    var choices = ["Ed Sheeran", "Taylor Swift", "Bruno Mars", "Ariana Grande", "Psy", "BTS", "SNSD"];
+
+    var limit = 10;
+
+    choices.forEach(function (x,i) {
+        var choice = $("<button>").attr({value: x, class: "btn btn-sm btn-outline-danger mt-2 ml-2 choice"}).text(x);
+        $(".choices").append(choice);
+    });
 
     // Adding click event listen listener to all buttons
-    $("button").on("click", function () {
-        // Grabbing and storing the data-animal property value from the button
+    $(document).on("click", "button", function () {
+        var APIkey = "mngk5SvzQ4ueJME0P1Ny4MaxnGV169e3";
         var query = $(this).attr("data-value");
 
-        // Constructing a queryURL using the animal name
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-            query + "&api_key=" + APIkey + "&limit=10";
+            query + "&api_key=" + APIkey + "&limit=" + limit;
 
         // Performing an AJAX request with the queryURL
         $.ajax({
             url: queryURL,
             method: "GET"
         })
-            // After data comes back from the request
             .then(function (response) {
                 console.log(queryURL);
 
