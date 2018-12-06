@@ -3,53 +3,74 @@ $(document).ready(function () {
     var choices = ["Ed Sheeran", "Taylor Swift", "Bruno Mars", "Ariana Grande", "Psy", "BTS", "SNSD"];
 
     var limit = 10;
+    var APIkey = "mngk5SvzQ4ueJME0P1Ny4MaxnGV169e3";
 
-    choices.forEach(function (x,i) {
-        var choice = $("<button>").attr({value: x, class: "btn btn-sm btn-outline-danger mt-2 ml-2 choice"}).text(x);
-        $(".choices").append(choice);
+    var choiceDisplay = $(".choices");
+    var resultDisplay = $(".resultDisplay");
+
+    choices.forEach(function (x, i) {
+        var choice = $("<button>").attr({ value: x, class: "btn btn-sm btn-outline-danger mt-2 ml-2 choice" }).text(x);
+        choiceDisplay.append(choice);
     });
 
     // Adding click event listen listener to all buttons
-    $(document).on("click", "button", function () {
-        var APIkey = "mngk5SvzQ4ueJME0P1Ny4MaxnGV169e3";
-        var query = $(this).attr("data-value");
+    $(document).on("click", ".choice", function () {
 
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-            query + "&api_key=" + APIkey + "&limit=" + limit;
+        var query = $(this).val();
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + query + "&api_key=" + APIkey + "&limit=" + limit;
 
         // Performing an AJAX request with the queryURL
         $.ajax({
             url: queryURL,
             method: "GET"
-        })
-            .then(function (response) {
-                console.log(queryURL);
+        }).then(function (response) {
+            var results = response.data;
 
-                console.log(response);
-                // storing the data from the AJAX request in the results variable
-                var results = response.data;
+            console.log(results);
 
-                // Looping through each result item
-                for (var i = 0; i < results.length; i++) {
+            for (var i = 0; i < limit; i++) {
+                var starDiv = $("<div class='mr-2 result'>");
+                var p = $("<p>").text("Rating: " + results[i].rating);
+                var starImage = $("<img>").attr({
+                    "src": results[i].images.fixed_height_still.url,
+                    "data-still": results[i].images.fixed_height_still.url,
+                    "data-gif": results[i].images.fixed_height.url,
+                    "data-state": "still",
+                    "class": "img-fluid starImg"
+                });
 
-                    // Creating and storing a div tag
-                    var animalDiv = $("<div>");
+                starDiv.append(starImage, p);
+                resultDisplay.prepend(starDiv);
+            };
+        });
 
-                    // Creating a paragraph tag with the result item's rating
-                    var p = $("<p>").text("Rating: " + results[i].rating);
+        $(document).on("click", ".starImg", function (e) {
+            e.stopImmediatePropagation(); // Prevent multi-runs the function;
 
-                    // Creating and storing an image tag
-                    var animalImage = $("<img>");
-                    // Setting the src attribute of the image to a property pulled off the result item
-                    animalImage.attr("src", results[i].images.fixed_height.url);
+            var gifSrc = $(this).attr("data-gif");
+            var stillSrc = $(this).attr("data-still");
+            var state = $(this).attr("data-state");
 
-                    // Appending the paragraph and image tag to the animalDiv
-                    animalDiv.append(p);
-                    animalDiv.append(animalImage);
+            if (state === "still") {
+                $(this).attr({ "data-state": "gif", src: gifSrc });
+            }
+            else {
+                $(this).attr({ "data-state": "still", src: stillSrc });
+            };
+        });
 
-                    // Prependng the animalDiv to the HTML page in the "#gifs-appear-here" div
-                    $("#gifs-appear-here").prepend(animalDiv);
-                }
-            });
+        $("#clear").on("click", function (event) {
+            resultDisplay.empty();
+        });
+
+        $("#addon").on("click", function (event) {
+            event.preventDefault();
+            var x = $(".form-control").val();
+            if (x != "") {
+                var choice = $("<button>").attr({ value: x, class: "btn btn-sm btn-outline-danger mt-2 ml-2 choice" }).text(x);
+                $(".choices").append(choice);
+                $(".form-control").val("");
+            };
+        });
     });
 });

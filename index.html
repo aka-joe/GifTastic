@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/main.css" />
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
@@ -19,49 +19,35 @@
 
 <body>
     <nav class="navbar navbar-expand-sm navbar-dark bg-danger">
-        <a class="navbar-brand logo" href="#">Artist GIFs</a>
+        <div class="navbar-brand logo" href="#">Artist GIFs</div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <button class="btn btn-warning ml-auto">♥ Favorite</button>
-            <form class="form-inline ml-3">
+            <button id="clear" class="btn btn-warning ml-auto mr-3">⌧ Clear</button>
+            <button id="favorite" class="btn btn-warning mr-3 mt-2 mb-2">♥ Favorite</button>
+            <form class="form-inline">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class=" btn btn-warning" id="basic-addon1">★ Add</span>
+                        <button type="submit" class="btn btn-warning" id="addon">★ Add</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Artist or Band name" aria-label="Username"
-                        aria-describedby="basic-addon1">
+                    <input type="text" class="form-control" placeholder="Artist or Band name">
                 </div>
             </form>
         </div>
     </nav>
-    <div class="choices"></div>
+
+    <center>
+        <div class="choices mb-3"></div>
+        <div class="resultDisplay mb-5"></div>
+    </center>
+
+    <footer class="footer small text-light bg-danger">
+        &copy; Copyright 2018 Joseph Ahn
+    </footer>
 
     <script src="./assets/javascript/main.js"></script>
 </body>
 
 </html>
-
-
-<!--<ul class="navbar-nav mr-auto">
-        <li class="nav-item col-6">
-            <a class="nav-link" href="#">ABC</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">ABC</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">ABC</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">ABC</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">ABC</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">ABC</a>
-        </li>
-    </ul>-->

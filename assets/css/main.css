@@ -2,3 +2,16 @@
     font-size: 36px;
     font-weight: 500;
 }
+
+.result {
+    display: inline-block;
+}
+
+.footer {
+    position: fixed;
+    padding: 10px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+  }
