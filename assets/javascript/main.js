@@ -29,16 +29,19 @@ $(document).ready(function () {
             console.log(results);
 
             for (var i = 0; i < limit; i++) {
-                var starDiv = $("<div class='mr-2 result'>");
-                var p = $("<p>").text("Rating: " + results[i].rating);
+                var starDiv = $("<div class='card mr-2 mb-2 result'>");
+                var p = $("<div class='input-group text-uppercase p-0'>")
+                var fav = $("<button class='input-group-prepend btn-danger pl-2 pr-2'>").text("♥");
+                var rating = $("<div class='form-control'>").text("Rating: " + results[i].rating);
                 var starImage = $("<img>").attr({
                     "src": results[i].images.fixed_height_still.url,
                     "data-still": results[i].images.fixed_height_still.url,
                     "data-gif": results[i].images.fixed_height.url,
                     "data-state": "still",
-                    "class": "img-fluid starImg"
+                    "class": "img-fluid starImg card-top-img"
                 });
 
+                p.append(fav, rating);
                 starDiv.append(starImage, p);
                 resultDisplay.prepend(starDiv);
             };
