@@ -46,34 +46,32 @@ $(document).ready(function () {
                 resultDisplay.prepend(starDiv);
             };
         });
+    });
 
-        $(document).on("click", ".starImg", function (e) {
-            e.stopImmediatePropagation(); // Prevent multi-runs the function;
+    $(document).on("click", ".starImg", function (e) {
+        var gifSrc = $(this).attr("data-gif");
+        var stillSrc = $(this).attr("data-still");
+        var state = $(this).attr("data-state");
 
-            var gifSrc = $(this).attr("data-gif");
-            var stillSrc = $(this).attr("data-still");
-            var state = $(this).attr("data-state");
+        if (state === "still") {
+            $(this).attr({ "data-state": "gif", src: gifSrc });
+        }
+        else {
+            $(this).attr({ "data-state": "still", src: stillSrc });
+        };
+    });
 
-            if (state === "still") {
-                $(this).attr({ "data-state": "gif", src: gifSrc });
-            }
-            else {
-                $(this).attr({ "data-state": "still", src: stillSrc });
-            };
-        });
+    $("#clear").on("click", function (event) {
+        resultDisplay.empty();
+    });
 
-        $("#clear").on("click", function (event) {
-            resultDisplay.empty();
-        });
-
-        $("#addon").on("click", function (event) {
-            event.preventDefault();
-            var x = $(".form-control").val();
-            if (x != "") {
-                var choice = $("<button>").attr({ value: x, class: "btn btn-sm btn-outline-danger mt-2 ml-2 choice" }).text(x);
-                $(".choices").append(choice);
-                $(".form-control").val("");
-            };
-        });
+    $("#addon").on("click", function (event) {
+        event.preventDefault();
+        var x = $(".form-control").val();
+        if (x != "") {
+            var choice = $("<button>").attr({ value: x, class: "btn btn-sm btn-outline-danger mt-2 ml-2 choice" }).text(x);
+            $(".choices").append(choice);
+            $(".form-control").val("");
+        };
     });
 });
