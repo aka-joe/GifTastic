@@ -1,4 +1,16 @@
 $(document).ready(function () {
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyCEadW-yXPvWKvlAuUotl5agky7uGxq67o",
+        authDomain: "aj-giftastic.firebaseapp.com",
+        databaseURL: "https://aj-giftastic.firebaseio.com",
+        projectId: "aj-giftastic",
+        storageBucket: "aj-giftastic.appspot.com",
+        messagingSenderId: "40057201044"
+    };
+    firebase.initializeApp(config);
+
+    var database = firebase.database();
 
     var choices = ["Ed Sheeran", "Taylor Swift", "Bruno Mars", "Ariana Grande", "Big Bang", "Psy", "BTS", "SNSD"];
 
@@ -31,7 +43,7 @@ $(document).ready(function () {
             for (var i = 0; i < limit; i++) {
                 var starDiv = $("<div class='card mr-2 mb-2 result'>");
                 var p = $("<div class='input-group text-uppercase p-0'>")
-                var fav = $("<button class='input-group-prepend btn-danger pl-2 pr-2'>").text("♥");
+                var fav = $("<button class='input-group-prepend btn-outline-danger pl-2 pr-2' style='z-index:9999'>").text("♥");
                 var rating = $("<div class='form-control'>").text("Rating: " + results[i].rating);
                 var starImage = $("<img>").attr({
                     "src": results[i].images.fixed_height_still.url,
@@ -55,13 +67,12 @@ $(document).ready(function () {
 
         if (state === "still") {
             $(this).attr({ "data-state": "gif", src: gifSrc });
-        }
-        else {
+        } else {
             $(this).attr({ "data-state": "still", src: stillSrc });
         };
     });
 
-    $("#clear").on("click", function (event) {
+    $("#clear").on("click", function () {
         resultDisplay.empty();
     });
 
@@ -73,5 +84,9 @@ $(document).ready(function () {
             $(".choices").append(choice);
             $(".form-control").val("");
         };
+    });
+
+    $(".input-group-prepend").on("click", function () {
+        
     });
 });
