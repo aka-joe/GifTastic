@@ -1,3 +1,7 @@
+.navbar {
+    padding-left: 40px;
+}
+
 .navbar-brand {
     font-size: 40px;
     font-weight: 500;
@@ -40,6 +44,15 @@
         from {height: 50px;}
         to {height: 40px;}
     }
+    @keyframes moving1 {
+        from {padding-left: 40px;}
+        to {padding-left: 25px;}
+    }
+    .navbar {
+        animation-name: moving1;
+        animation-duration: 1s;
+        padding-left: 25px;
+    }
     .navbar-brand, .title {
         animation-name: resize1;
         animation-duration: 1s;
@@ -67,6 +80,15 @@
     @keyframes resize4 {
         from {height: 40px;}
         to {height: 30px;}
+    }
+    @keyframes moving2 {
+        from {padding-left: 25px;}
+        to {padding-left: 10px;}
+    }
+    .navbar {
+        animation-name: moving2;
+        animation-duration: 1s;
+        padding-left: 10px;
     }
     .navbar-brand, .title {
         animation-name: resize3;
