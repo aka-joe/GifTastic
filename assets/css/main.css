@@ -3,6 +3,17 @@
     font-weight: 500;
 }
 
+.title {
+    display: inline;
+    color: white;
+    font-size: 34px;
+    font-weight: 500;
+}
+
+#albumArt {
+    height: 50px;
+}
+
 .result {
     display: inline-block;
 }
@@ -22,13 +33,22 @@
 
   @media screen and (max-width: 767px) {
     @keyframes resize1 {
-        from {font-size: 40px;}
+        from {font-size: 34px;}
         to {font-size: 27px;}
     }
-    .navbar-brand {
+    @keyframes resize2 {
+        from {height: 50px;}
+        to {height: 40px;}
+    }
+    .navbar-brand, .title {
         animation-name: resize1;
         animation-duration: 1s;
         font-size: 27px;
+    }
+    #albumArt {
+        animation-name: resize2;
+        animation-duration: 1s;
+        height: 40px;
     }
     .wrapper {
         margin-top: 67px;
@@ -40,14 +60,26 @@
   }
 
   @media screen and (max-width: 575px) {
-    @keyframes resize2 {
+    @keyframes resize3 {
         from {font-size: 27px;}
         to {font-size: 20px;}
     }
-    .navbar-brand {
-        animation-name: resize2;
+    @keyframes resize4 {
+        from {height: 40px;}
+        to {height: 30px;}
+    }
+    .navbar-brand, .title {
+        animation-name: resize3;
         animation-duration: 1s;
         font-size: 20px;
+    }
+    #albumArt {
+        animation-name: resize4;
+        animation-duration: 1s;
+        height: 30px;
+    }
+    .playBtn {
+        font-size: 10px;
     }
     .wrapper {
         margin-top: 60px;

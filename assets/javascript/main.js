@@ -3,12 +3,14 @@ $(document).ready(function () {
 
     var choices = ["Ed Sheeran", "Taylor Swift", "Bruno Mars", "Ariana Grande", "Big Bang", "Psy", "BTS", "SNSD"];
     var choiceDisplay = $(".choices");
+    var itunesDisplay = $(".logo");
     var resultDisplay = $(".resultDisplay");
+    var music = document.createElement('audio');
     var favID = [];
     var favGif = [];
     var favStill = [];
     var favRating = [];
-    var favPage = false;
+    var page = "empty";
 
     if (localStorage.getItem("favID") && localStorage.getItem("favGif") && localStorage.getItem("favStill") && localStorage.getItem("favRating")) {
         favID = JSON.parse(localStorage.getItem("favID"));
@@ -29,16 +31,17 @@ $(document).ready(function () {
 
     // Adding click event listen listener to all buttons
     $(document).on("click", ".choice", function () {
-        if (favPage) {
-            favPage = false;
-            resultDisplay.empty();
-            $(".choice").attr("data-count", 10);
+        if (page != "main") {
+            page = "main";
+            reset();
         }
 
         var query = $(this).val();
+        itunesAPI(query);
+
         var limit = Number($(this).attr("data-count"));
         $(this).attr("data-count", limit + 10);
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + query + "&limit=" + limit + "&api_key=" + APIkey;
+        queryURL = "https://api.giphy.com/v1/gifs/search?q=" + query + "&limit=" + limit + "&api_key=" + APIkey;
 
         // Performing an AJAX request with the queryURL
         $.ajax({
@@ -57,6 +60,36 @@ $(document).ready(function () {
         });
     });
 
+    function itunesAPI(term) {
+        $.ajax({
+            url: 'https://itunes.apple.com/search',
+            crossDomain: true,
+            dataType: 'jsonp',
+            data: {
+                term: term,
+                entity: 'song',
+                limit: 10,
+                explicit: 'No'
+            },
+            method: 'GET'
+        }).then(function (data) {
+            var results = data.results;
+            var n = Math.floor((Math.random() * 10));
+            var trackName = results[n].trackName;
+            if (trackName.length > 22) {
+                trackName = trackName.substring(0, 20) + "...";
+            }
+            var image = $("<img>").attr({ "src": results[n].artworkUrl60, id: "albumArt" });
+            var title = $("<div class='title ml-3 mr-3'>").text(trackName);
+            var playBtn = $("<button class='playBtn btn btn-sm btn-warning'>").text("▶");
+            itunesDisplay.empty().append(image, title, playBtn);
+
+            music.setAttribute('src', results[n].previewUrl);
+            music.currentTime = 0;
+            music.play();
+        });
+    };
+
     function pictureCard(id, gifUrl, stillUrl, rate, favStatus) {
         var starDiv = $("<div>").addClass("card mr-2 mb-2 result " + id);
         var p = $("<div class='input-group p-0'>")
@@ -70,7 +103,7 @@ $(document).ready(function () {
         });
         var fav = $("<button class='input-group-prepend pl-2 pr-2 favBtn'>")
             .text("♥").attr({
-                style: 'z-index:9999',
+                style: 'z-index:9999; cursor:pointer;',
                 "data-rating": rate,
                 "data-still": stillUrl,
                 "data-gif": gifUrl,
@@ -83,8 +116,9 @@ $(document).ready(function () {
         }
 
         p.append(fav, rating);
-        starDiv.append(starImage, p);
+        starDiv.append(starImage, p).hide();
         resultDisplay.prepend(starDiv);
+        starDiv.fadeIn();
     };
 
     $(document).on("click", ".starImg", function (e) {
@@ -100,8 +134,8 @@ $(document).ready(function () {
     });
 
     $("#clear").on("click", function () {
-        resultDisplay.empty();
-        $(".choice").attr("data-count", 10);
+        page = "empty";
+        reset();
     });
 
     $("#addon").on("click", function (event) {
@@ -119,13 +153,20 @@ $(document).ready(function () {
     });
 
     $("#favorite").on("click", function (event) {
-        favPage = true;
-        resultDisplay.empty();
-        $(".choice").attr("data-count", 10);
+        page = "favorite";
+        reset();
         favID.forEach(function (x, i) {
             pictureCard(x, favGif[i], favStill[i], favRating[i], 0);
         });
     });
+
+    function reset() {
+        itunesDisplay.text("Artist GIFs");
+        resultDisplay.empty();
+        $(".choice").attr("data-count", 10);
+        music.pause();
+        music.setAttribute('src', "");
+    };
 
     $(document).on("click", ".favBtn", function () {
         var id = $(this).attr("id");
@@ -138,8 +179,8 @@ $(document).ready(function () {
             favRating.push($(this).attr("data-rating"));
             $(this).removeClass("btn-outline-danger").addClass("btn-warning");
         } else {
-            if (favPage) {
-                $("."+favID[position]).fadeOut();
+            if (page === "favorite") {
+                $("." + favID[position]).fadeOut();
             } else {
                 $(this).removeClass("btn-warning").addClass("btn-outline-danger");
             };
@@ -153,5 +194,15 @@ $(document).ready(function () {
         localStorage.setItem("favGif", JSON.stringify(favGif));
         localStorage.setItem("favStill", JSON.stringify(favStill));
         localStorage.setItem("favRating", JSON.stringify(favRating));
+    });
+
+    $(document).on("click", ".playBtn", function () {
+        if (music.paused) {
+            $(this).text("▶");
+            music.play();
+        } else {
+            $(this).text("❚❚");
+            music.pause();
+        }
     });
 });
