@@ -76,8 +76,8 @@ $(document).ready(function () {
             var results = data.results;
             var n = Math.floor((Math.random() * 10));
             var trackName = results[n].trackName;
-            if (trackName.length > 22) {
-                trackName = trackName.substring(0, 20) + "...";
+            if (trackName.length > 20) {
+                trackName = trackName.substring(0, 18) + "...";
             }
             var image = $("<img>").attr({ "src": results[n].artworkUrl60, id: "albumArt" });
             var title = $("<div class='title ml-3 mr-3'>").text(trackName);
