@@ -3,14 +3,14 @@ $(document).ready(function () {
     var APIkey = "mngk5SvzQ4ueJME0P1Ny4MaxnGV169e3";
 
     // Initialize variables
-    var choices = ["Ed Sheeran", "Taylor Swift", "Bruno Mars", "Ariana Grande", "Big Bang", "Psy", "BTS", "SNSD"];
+    var choices = ["Taylor Swift", "Ed Sheeran", "Ariana Grande", "Bruno Mars", "Katy Perry", "Beyonce", "BTS",  "Psy"];
     var choiceDisplay = $(".choices");
     var itunesDisplay = $(".logo");
     var resultDisplay = $(".resultDisplay");
     var welcome = $("#welcome");
-    var welcomeImg = $("#welcomeImg");
     var popup = $("#titleCenter");
     var music = document.createElement('audio');
+    var songList = [];
     var favID = [];
     var favGif = [];
     var favStill = [];
@@ -72,7 +72,7 @@ $(document).ready(function () {
         });
     });
 
-    // Using Itunes API to play random track and show title on the screen
+    // Using Itunes API to search and make song lists
     function itunesAPI(term) {
         $.ajax({
             url: 'https://itunes.apple.com/search',
@@ -86,21 +86,31 @@ $(document).ready(function () {
             },
             method: 'GET'
         }).then(function (data) {
-            var results = data.results;
-            var n = Math.floor((Math.random() * 20));
-            var trackName = results[n].trackName;
-            if (trackName.length > 20) {
-                trackName = trackName.substring(0, 18) + "...";
-            }
-            var image = $("<img class='albumArt rounded'>").attr("src", results[n].artworkUrl60);
-            var title = $("<a class='title text-light' target='_blank'>").attr("href", results[n].trackViewUrl).text(trackName);
-            var playBtn = $("<button class='playBtn btn btn-sm btn-warning'>").text("▶");
-            itunesDisplay.empty().append(image, title, playBtn);
-
-            music.setAttribute('src', results[n].previewUrl);
-            music.currentTime = 0;
-            music.play();
+            playList = data.results;
+            playMusic();
         });
+    };
+
+    // Play random song
+    function playMusic() {
+        var n = Math.floor((Math.random() * 20));
+        var trackName = playList[n].trackName;
+        if (trackName.length > 20) {
+            trackName = trackName.substring(0, 18) + "...";
+        }
+        var image = $("<img class='albumArt rounded'>").attr("src", playList[n].artworkUrl60);
+        var title = $("<a class='title text-light' target='_blank'>").attr("href", playList[n].trackViewUrl).text(trackName);
+        var playBtn = $("<button class='playBtn btn btn-sm btn-warning'>").text("▶");
+        itunesDisplay.empty().append(image, title, playBtn);
+
+        music.setAttribute('src', playList[n].previewUrl);
+        music.currentTime = 0;
+        music.play();
+    };
+
+    // When the song ended, play next song
+    music.onended = function() {
+        playMusic();
     };
 
     // Create GIF card (+ Favorite button, Showing rating, Download button)
@@ -194,10 +204,6 @@ $(document).ready(function () {
         $(".choice").attr("data-count", 10);
         music.pause();
         music.setAttribute('src', "");
-        $.ajax({
-            url: "https://api.giphy.com/v1/gifs/random?rating=pg-13&tag=hello&api_key=" + APIkey,
-            method: "GET"
-        }).then(function (response) {welcomeImg.attr("src", response.data.image_original_url)});
     };
 
     // Add-to or remove-from Favorites list 
