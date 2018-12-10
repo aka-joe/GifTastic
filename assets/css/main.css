@@ -100,10 +100,6 @@
         from {margin-left: 15px; margin-right: 15px;}
         from {margin-left: 10px; margin-right: 10px;}
     }
-    @keyframes moving4 {
-        from {top: 55%;}
-        to {top: 60%;}
-    }
     .navbar {
         animation-name: moving2;
         animation-duration: 1s;
@@ -120,11 +116,6 @@
         margin-left: 10px;
         margin-right: 10px;
     }
-    #welcome {
-        animation-name: moving4;
-        animation-duration: 1s;
-        top: 60%;
-    }
     .albumArt {
         animation-name: resize4;
         animation-duration: 1s;
@@ -135,9 +126,16 @@
     }
     .wrapper {
         margin-top: 60px;
-        min-height: calc(100vh - 119px); 
+        min-height: calc(100vh - 103px); 
     }
     #clear, #favorite {
         width: 100%;
+    }
+    #welcome {
+        margin-top: 50px;
+        position: static;
+        top: 0;
+        left: 0;
+        transform: translate(0, 0);
     }
   }
