@@ -12,10 +12,20 @@
     color: white;
     font-size: 34px;
     font-weight: 500;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
-#albumArt {
+.albumArt {
     height: 50px;
+}
+
+#welcome {
+    max-width: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .result {
@@ -35,6 +45,7 @@
     text-align: center;
   }
 
+/* Media query for mobile responsive */
   @media screen and (max-width: 767px) {
     @keyframes resize1 {
         from {font-size: 34px;}
@@ -58,7 +69,7 @@
         animation-duration: 1s;
         font-size: 27px;
     }
-    #albumArt {
+    .albumArt {
         animation-name: resize2;
         animation-duration: 1s;
         height: 40px;
@@ -85,6 +96,10 @@
         from {padding-left: 25px;}
         to {padding-left: 10px;}
     }
+    @keyframes moving3 {
+        from {margin-left: 15px; margin-right: 15px;}
+        from {margin-left: 10px; margin-right: 10px;}
+    }
     .navbar {
         animation-name: moving2;
         animation-duration: 1s;
@@ -95,7 +110,13 @@
         animation-duration: 1s;
         font-size: 20px;
     }
-    #albumArt {
+    .title {
+        animation-name: moving3;
+        animation-duration: 1s;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .albumArt {
         animation-name: resize4;
         animation-duration: 1s;
         height: 30px;

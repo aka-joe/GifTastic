@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>GifTastic</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Includes Bootstrap & jQuery -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/main.css" />
@@ -15,9 +17,11 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+    <script src="./assets/javascript/download.js"></script>
 </head>
 
 <body>
+    <!-- Header Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger fixed-top">
         <div class="navbar-brand logo p-0">Artist GIFs</div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -26,7 +30,7 @@
         </button>
         <div class="collapse navbar-collapse mr-4" id="navbarSupportedContent">
             <button id="clear" class="btn btn-warning ml-auto mr-3 mt-2 mb-2">⌧ Clear</button>
-            <button id="favorite" class="btn btn-warning mr-3 mt-1 mb-1">♥ Favorite</button>
+            <button id="favorite" class="btn btn-warning mr-3 mt-1 mb-1">♥ Favorite <span class="badge badge-light">0</span></button>
             <form class="form-inline mt-2 mb-2">
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -38,11 +42,33 @@
         </div>
     </nav>
 
+    <!-- Main Body -->
     <div class="wrapper">
         <div class="choices mb-3"></div>
-        <div class="resultDisplay mb-3"></div>
+        <div class="resultDisplay mb-3">
+            <div id="welcome" class="card mr-2 mb-2">
+                <img src="./assets/images/aj.jpg" class="img-fluid card-top-img">
+                <div class="input-group p-0">
+                    <button class="input-group-prepend pl-2 pr-2 btn-outline-danger" style="z-index:9999;" >♥</button>
+                    <div class="form-control">W E L C O M E</div>
+                    <img src="./assets/images/download.gif" height="38">
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modalCenter" tabindex="-1" role="dialog" aria-labelledby="titleCenter" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header mx-auto">
+                        <h5 class="modal-title text-danger" id="titleCenter">Added to your ♥ Favorites list</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <!-- Footer -->
     <footer class="footer small text-light bg-danger">
         &copy; Copyright 2018 Joseph Ahn
     </footer>
