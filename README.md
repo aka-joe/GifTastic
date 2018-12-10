@@ -2,7 +2,7 @@
 
 ### Overview
 
-This is a dynamic web page that populates with gifs and plays random song of the artist that you chose.  
+This is a dynamic web page that populates with gifs and plays random song of the artist that you choose.  
 [Click here to try this app.](https://aka-joe.github.io/GifTastic/)
 
 ### How to Use
@@ -20,7 +20,7 @@ $(document).on("click", ".choice", function () {
   var query = $(this).val();
   var limit = Number($(this).attr("data-count"));
   $(this).attr("data-count", limit + 10);
-  queryURL = "https://api.giphy.com/v1/gifs/search?rating=pg-13&q=" + query + "&limit=" + limit + "&api_key=" + APIkey;
+  queryURL = "https://api.giphy.com/v1/gifs/search?rating=pg-13&q=" + query + "&limit=" + limit + "&api_key=" + key;
 
   $.ajax({
     url: queryURL,
