@@ -7,6 +7,8 @@ $(document).ready(function () {
     var choiceDisplay = $(".choices");
     var itunesDisplay = $(".logo");
     var resultDisplay = $(".resultDisplay");
+    var welcome = $("#welcome");
+    var welcomeImg = $("#welcomeImg");
     var popup = $("#titleCenter");
     var music = document.createElement('audio');
     var favID = [];
@@ -34,6 +36,10 @@ $(document).ready(function () {
         var choice = $("<button>").attr({ value: x, "data-count": 10, class: "btn btn-sm btn-outline-danger mt-2 ml-2 choice" }).text(x);
         choiceDisplay.append(choice);
     });
+
+    // Reset
+    reset();
+    welcome.fadeIn();
 
     // Adding click event listen listener to all buttons
     $(document).on("click", ".choice", function () {
@@ -153,6 +159,7 @@ $(document).ready(function () {
     $("#clear").on("click", function () {
         page = "empty";
         reset();
+        welcome.fadeIn();
     });
 
     // Create new button
@@ -181,11 +188,16 @@ $(document).ready(function () {
 
     // Reset GIF search limit count
     function reset() {
+        welcome.hide();
         itunesDisplay.text("Artist GIFs");
         resultDisplay.empty();
         $(".choice").attr("data-count", 10);
         music.pause();
         music.setAttribute('src', "");
+        $.ajax({
+            url: "https://api.giphy.com/v1/gifs/random?rating=pg-13&tag=hello&api_key=" + APIkey,
+            method: "GET"
+        }).then(function (response) {welcomeImg.attr("src", response.data.image_original_url)});
     };
 
     // Add-to or remove-from Favorites list 
@@ -219,7 +231,7 @@ $(document).ready(function () {
 
         favList.text(favID.length);
         $('#modalCenter').delay(1500).fadeOut('slow');
-        setTimeout(function() {
+        setTimeout(function () {
             $("#modalCenter").modal('hide');
         }, 2000);
     });
