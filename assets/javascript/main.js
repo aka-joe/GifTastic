@@ -3,7 +3,7 @@ $(document).ready(function () {
     var APIkey = "mngk5SvzQ4ueJME0P1Ny4MaxnGV169e3";
 
     // Initialize variables
-    var choices = ["Taylor Swift", "Ed Sheeran", "Ariana Grande", "Bruno Mars", "Katy Perry", "Beyonce", "BTS",  "Psy"];
+    var choices = ["Taylor Swift", "Ed Sheeran", "Katy Perry", "BTS", "Bruno Mars", "Ariana Grande", "Beyonce", "Psy"];
     var choiceDisplay = $(".choices");
     var itunesDisplay = $(".logo");
     var resultDisplay = $(".resultDisplay");

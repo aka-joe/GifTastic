@@ -100,6 +100,10 @@
         from {margin-left: 15px; margin-right: 15px;}
         from {margin-left: 10px; margin-right: 10px;}
     }
+    @keyframes moving4 {
+        from {top: 55%;}
+        to {top: 60%;}
+    }
     .navbar {
         animation-name: moving2;
         animation-duration: 1s;
@@ -115,6 +119,11 @@
         animation-duration: 1s;
         margin-left: 10px;
         margin-right: 10px;
+    }
+    #welcome {
+        animation-name: moving4;
+        animation-duration: 1s;
+        top: 60%;
     }
     .albumArt {
         animation-name: resize4;
