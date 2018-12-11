@@ -11,6 +11,10 @@
     margin-right: 25px;
 }
 
+.modal {
+    z-index: 10000000;
+}
+
 .title {
     display: inline;
     color: white;
