@@ -95,8 +95,8 @@ $(document).ready(function () {
     function playMusic() {
         var n = Math.floor((Math.random() * 20));
         var trackName = playList[n].trackName;
-        if (trackName.length > 20) {
-            trackName = trackName.substring(0, 18) + "...";
+        if (trackName.length > 18) {
+            trackName = trackName.substring(0, 16) + "...";
         }
         var image = $("<img class='albumArt rounded'>").attr("src", playList[n].artworkUrl60);
         var title = $("<a class='title text-light' target='_blank'>").attr("href", playList[n].trackViewUrl).text(trackName);
