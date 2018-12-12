@@ -8,6 +8,7 @@ $(document).ready(function () {
     var itunesDisplay = $(".logo");
     var resultDisplay = $(".resultDisplay");
     var welcome = $("#welcome");
+    var emptyImg = $("#empty").hide();;
     var popup = $("#titleCenter");
     var music = document.createElement('audio');
     var songList = [];
@@ -109,7 +110,7 @@ $(document).ready(function () {
     };
 
     // When the song ended, play next song
-    music.onended = function() {
+    music.onended = function () {
         playMusic();
     };
 
@@ -191,14 +192,19 @@ $(document).ready(function () {
     $("#favorite").on("click", function (event) {
         page = "favorite";
         reset();
-        favID.forEach(function (x, i) {
-            pictureCard(x, favGif[i], favStill[i], favRating[i], 0);
-        });
+        if (favID.length === 0) {
+            emptyImg.fadeIn();
+        } else {
+            favID.forEach(function (x, i) {
+                pictureCard(x, favGif[i], favStill[i], favRating[i], 0);
+            });
+        };
     });
 
     // Reset GIF search limit count
     function reset() {
         welcome.hide();
+        emptyImg.hide();
         itunesDisplay.text("Artist GIFs");
         resultDisplay.empty();
         $(".choice").attr("data-count", 10);
@@ -222,6 +228,9 @@ $(document).ready(function () {
             popup.text("Removed from your Favorites list");
             if (page === "favorite") {
                 $("." + favID[position]).fadeOut();
+                if (favID.length === 1) {
+                    emptyImg.fadeIn();
+                }
             } else {
                 $(this).removeClass("btn-warning").addClass("btn-outline-danger");
             };

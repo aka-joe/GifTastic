@@ -28,7 +28,7 @@
     height: 50px;
 }
 
-#welcome {
+.welc {
     margin: 0;
     position: absolute;
     top: 55%;
@@ -139,7 +139,7 @@
     #clear, #favorite {
         width: 100%;
     }
-    #welcome {
+    .welc {
         margin-top: 50px;
         position: static;
         top: 0;
