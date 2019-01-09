@@ -11,9 +11,9 @@ Also, this is a mobile compatible website. [Click here to try this site.](https:
 
 ### Key Codes
 
-At the first time that the user click the choice button, this code will get the values in position 0 ~ 9 of the result array.  
-At the second time that the user click same choice buttonn, this code will get next values in position 10 ~ 19 of the array.  
-If the user click same choice again, this code will get the values in position 20 ~ 29, and so on...
+When the user clicks the choice button for the first time, this code will get the values in position 0 ~ 9 of the result array.  
+If the user clicks same choice button again, this code will get next values in position 10 ~ 19 of the array. 
+If the user clicks same choice button again, this code will get the values in position 20 ~ 29, and so on...
 
 ```
 $(document).on("click", ".choice", function () {
