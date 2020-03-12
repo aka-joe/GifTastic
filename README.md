@@ -3,7 +3,7 @@
 ### Overview
 
 This is a dynamic web page that populates with gifs and plays random song of the artist that you choose.  
-Also, this is a mobile compatible website. [Click here to try this site.](https://aka-joe.github.io/GifTastic/) 
+Also, this is a mobile compatible website. [Click here to try this site.](https://cre8dev.github.io/GifTastic/) 
 
 ### How to Use
 
